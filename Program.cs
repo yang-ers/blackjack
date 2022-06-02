@@ -43,8 +43,6 @@ namespace BlackJack
                 Console.WriteLine("Game deck initialized");
                 Console.WriteLine("Dealing hands");
 
-
-
                 //deals two cards to each person including banker and remove from current deck
                 PlayerHand.dealInitialCardsToPlayer(GameDeck);
                 BankerHand.BankerHit(GameDeck);
@@ -75,7 +73,7 @@ namespace BlackJack
                 }
 
                 CurrentRound.checkWin(BankerHand, PlayerHand);
-                Console.WriteLine("Your total chip value is: " + Player1.TotalAmount);
+                Console.WriteLine("Your total chip value is: $" + Player1.TotalAmount);
                 CurrentRound.endRound();
 
             }

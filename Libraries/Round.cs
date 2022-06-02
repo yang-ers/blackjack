@@ -27,7 +27,7 @@ namespace BlackJack.Libraries
         {
             Deck GameDeck = new Deck();
             Console.WriteLine("Initializing Deck");
-            foreach (var cardVal in Enum.GetValues(typeof(Card.CardValues)))
+            foreach (var cardVal in Enum.GetNames(typeof(Card.CardValues)))
             {
                 foreach (var cardSuit in Enum.GetValues(typeof(Card.CardSuits)))
                 {
@@ -45,8 +45,14 @@ namespace BlackJack.Libraries
 
         public void checkWin(Hand BankerHand, Hand PlayerHand)
         {
+            if (PlayerHand.Blackjack == true)
+            {
+                BankerHand.user.TotalAmount -= PlayerHand.BetAmount * 1.5;
+                PlayerHand.user.TotalAmount += PlayerHand.BetAmount * 1.5;
+                Console.WriteLine("You hit Blackjack! You win 1.5x!");
+            }
 
-            if (BankerHand.HandTotal > PlayerHand.HandTotal & BankerHand.checkBust() != true | PlayerHand.checkBust() == true)
+            else if (BankerHand.HandTotal > PlayerHand.HandTotal & BankerHand.checkBust() != true | PlayerHand.checkBust() == true)
             {
                 BankerHand.user.TotalAmount += PlayerHand.BetAmount;
                 PlayerHand.user.TotalAmount -= PlayerHand.BetAmount;

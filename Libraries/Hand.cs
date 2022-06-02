@@ -14,7 +14,8 @@ namespace BlackJack.Libraries
         public double BetAmount { get; set; }
         public List<Card> CurrentHand { get; set; } = null!;
         public bool Bust { get; set; } = false;
-        public bool Stay { get; set; } = false; 
+        public bool Stay { get; set; } = false;
+        public bool Blackjack { get; set; }
 
         private static int beginZero = 0;
 
@@ -79,7 +80,6 @@ namespace BlackJack.Libraries
 
             this.CurrentHand?.Add(randomCard);
             GameDeck.CurrentDeck.RemoveAt(randIndex);
-
             this.HitTotal++;
             calculateHandTotal();
 
@@ -133,7 +133,23 @@ namespace BlackJack.Libraries
                 this.playerHit(GameDeck);
             }
 
+            checkIfBlackjack(this); 
 
+        }
+
+        //check if the value of the two initial cards dealt to player equates to 21
+        public void checkIfBlackjack (Hand PlayerHand)
+        {
+            int HandTotal = 0; 
+            foreach (Card card in PlayerHand.CurrentHand)
+            {
+                HandTotal += Convert.ToInt16(Enum.Parse(typeof(Card.CardValues), card.Value)); 
+            }
+
+            if (HandTotal == 21 & this.CurrentHand.Count == 2)
+            {
+                this.Blackjack = true; 
+            }
         }
 
     }
