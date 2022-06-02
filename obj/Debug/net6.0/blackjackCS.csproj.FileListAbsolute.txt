@@ -1,0 +1,15 @@
+C:\Users\Charlie\blackjackCS\bin\Debug\net6.0\blackjackCS.exe
+C:\Users\Charlie\blackjackCS\bin\Debug\net6.0\blackjackCS.deps.json
+C:\Users\Charlie\blackjackCS\bin\Debug\net6.0\blackjackCS.runtimeconfig.json
+C:\Users\Charlie\blackjackCS\bin\Debug\net6.0\blackjackCS.dll
+C:\Users\Charlie\blackjackCS\bin\Debug\net6.0\blackjackCS.pdb
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\blackjackCS.csproj.AssemblyReference.cache
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\blackjackCS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\blackjackCS.AssemblyInfoInputs.cache
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\blackjackCS.AssemblyInfo.cs
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\blackjackCS.csproj.CoreCompileInputs.cache
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\blackjackCS.dll
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\refint\blackjackCS.dll
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\blackjackCS.pdb
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\blackjackCS.genruntimeconfig.cache
+C:\Users\Charlie\blackjackCS\obj\Debug\net6.0\ref\blackjackCS.dll
