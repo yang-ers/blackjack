@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace BlackJack.Libraries
 {
-    public class Player : User
+    internal class Banker : User
     {
 
-        private double InitialWorth = 0;
+        private double InitialAmount = 99999; 
 
-        public Player()
+        public Banker()
         {
-            this.Name = Name;
-            this.TotalWorth = InitialWorth;
+            this.Name = "Banker"; 
+            this.TotalWorth = InitialAmount;
         }
-
     }
 }

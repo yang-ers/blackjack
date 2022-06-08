@@ -10,8 +10,8 @@ namespace BlackJack.Libraries
     {
         public int HandTotal { get; set; }
         public int HitTotal { get; set; }
-        public Player user { get; set; }
-        public double BetAmount { get; set; }
+        public User user { get; set; }
+        public uint BetAmount {get; set; }
         public List<Card> CurrentHand { get; set; } = null!;
         public bool Bust { get; set; } = false;
         public bool Stay { get; set; } = false;
@@ -19,7 +19,8 @@ namespace BlackJack.Libraries
 
         private static int beginZero = 0;
 
-        public Hand(Player user, double betAmount)
+
+        public Hand(User user, uint betAmount)
         {
 
             this.HandTotal = beginZero;
@@ -30,6 +31,7 @@ namespace BlackJack.Libraries
 
         }
 
+
         public bool checkAces(Card card)
         {
             if (card.Value == "Ace")
@@ -39,6 +41,7 @@ namespace BlackJack.Libraries
             else return false; 
              
         }
+
 
         public int calculateHandTotal()
         {
@@ -70,6 +73,7 @@ namespace BlackJack.Libraries
 
         }
 
+
         public Card addCardToHand(Deck GameDeck)
         {
             var rand = new Random();
@@ -97,17 +101,11 @@ namespace BlackJack.Libraries
             Console.WriteLine("The total value of your hand is: " + this.HandTotal);
         }
 
+         
         public bool checkBust()
         {
-            if (this.HandTotal > 21)
-            {
-                return true;
-            }
 
-            else
-            {
-                return false;
-            }
+            return this.HandTotal > 21 ? true : false;
         }
 
 
@@ -118,12 +116,14 @@ namespace BlackJack.Libraries
             Console.WriteLine("You receives a " + card.Value + " of " + card.Suit);
         }
 
+
         public void BankerHit(Deck GameDeck)
         {
             Card card = addCardToHand(GameDeck);
             Console.WriteLine("Banker receives a " + card.Value + " of " + card.Suit);
             Console.WriteLine("Banker total = " + this.HandTotal); 
         }
+
 
         public void dealInitialCardsToPlayer(Deck GameDeck)
         {

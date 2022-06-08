@@ -13,17 +13,15 @@ namespace BlackJack
         {
 
             Console.WriteLine("Welcome to you always will win Blackjack, where you have the edge against the house");
-
             Console.WriteLine("Please enter your name");
-
-            var Player1 = new Player();
-            var Banker = new Player.MakeBanker();
-            Player1.Name = Convert.ToString(Console.ReadLine());
+            User Player1 = new Player();
+            User Banker = new Banker();
+            Player1.Name = Console.ReadLine();
             Console.WriteLine("Hello, " + Player1.Name);
 
-            var Continue = true; 
+            var Continue = true;
 
-            while (Continue != false)
+            while (Continue == true)
             {
 
                 if (Continue != true)
@@ -34,7 +32,9 @@ namespace BlackJack
                 Round CurrentRound = new Round();
 
                 Console.WriteLine("Please enter your bet amount for this hand");
-                int BetAmount = Convert.ToInt32(Console.ReadLine());
+                var bet = Console.ReadLine();
+                uint BetAmount = Convert.ToUInt16(bet); 
+
                 var BankerHand = new Hand(Banker, BetAmount);
                 var PlayerHand = new Hand(Player1, BetAmount);
 
@@ -73,7 +73,7 @@ namespace BlackJack
                 }
 
                 CurrentRound.checkWin(BankerHand, PlayerHand);
-                Console.WriteLine("Your total chip value is: $" + Player1.TotalAmount);
+                Console.WriteLine("Your total chip value is: $" + Player1.TotalWorth);
                 CurrentRound.endRound();
 
             }

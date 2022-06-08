@@ -42,33 +42,32 @@ namespace BlackJack.Libraries
             return GameDeck;
         }
 
-
         public void checkWin(Hand BankerHand, Hand PlayerHand)
         {
             if (PlayerHand.Blackjack == true)
             {
-                BankerHand.user.TotalAmount -= PlayerHand.BetAmount * 1.5;
-                PlayerHand.user.TotalAmount += PlayerHand.BetAmount * 1.5;
+                BankerHand.user.TotalWorth -= PlayerHand.BetAmount * 1.5;
+                PlayerHand.user.TotalWorth += PlayerHand.BetAmount * 1.5;
                 Console.WriteLine("You hit Blackjack! You win 1.5x!");
             }
 
             else if (BankerHand.HandTotal > PlayerHand.HandTotal & BankerHand.checkBust() != true | PlayerHand.checkBust() == true)
             {
-                BankerHand.user.TotalAmount += PlayerHand.BetAmount;
-                PlayerHand.user.TotalAmount -= PlayerHand.BetAmount;
+                BankerHand.user.TotalWorth += PlayerHand.BetAmount;
+                PlayerHand.user.TotalWorth -= PlayerHand.BetAmount;
                 Console.WriteLine("Banker wins!");
             }
             else if (BankerHand.HandTotal < PlayerHand.HandTotal | (PlayerHand.checkBust() == false & BankerHand.checkBust() == true))
             {
-                BankerHand.user.TotalAmount -= PlayerHand.BetAmount;
-                PlayerHand.user.TotalAmount += PlayerHand.BetAmount;
+                BankerHand.user.TotalWorth -= PlayerHand.BetAmount;
+                PlayerHand.user.TotalWorth += PlayerHand.BetAmount;
                 Console.WriteLine("You win!");
             }
 
             else if (BankerHand.HandTotal.Equals(PlayerHand.HandTotal))
             {
-                BankerHand.user.TotalAmount += BankerHand.BetAmount;
-                PlayerHand.user.TotalAmount += PlayerHand.BetAmount;
+                BankerHand.user.TotalWorth += BankerHand.BetAmount;
+                PlayerHand.user.TotalWorth += PlayerHand.BetAmount;
                 Console.WriteLine("Push, no one wins");
             }
 
