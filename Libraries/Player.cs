@@ -10,12 +10,31 @@ namespace BlackJack.Libraries
     {
 
         private double InitialWorth = 0;
+        public bool Continue { get; set; }
 
+        private bool DefaultContinue = true; 
         public Player()
         {
             this.Name = Name;
             this.TotalWorth = InitialWorth;
+            this.Continue = DefaultContinue; 
+
+        }
+        public void ContinueToPlay(string input)
+        {
+            if (input.ToLower() == "yes")
+            {
+                this.Continue = true;
+            }
+
+            else
+            {
+                this.Continue = false;
+                Console.WriteLine("Game Finished");
+                Environment.Exit(0);
+            }
         }
 
     }
+
 }

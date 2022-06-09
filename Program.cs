@@ -14,17 +14,16 @@ namespace BlackJack
 
             Console.WriteLine("Welcome to you always will win Blackjack, where you have the edge against the house");
             Console.WriteLine("Please enter your name");
-            User Player1 = new Player();
-            User Banker = new Banker();
+            
+            Player Player1 = new Player();
+            Banker Banker = new Banker();
             Player1.Name = Console.ReadLine();
             Console.WriteLine("Hello, " + Player1.Name);
 
-            var Continue = true;
-
-            while (Continue == true)
+            while (Player1.Continue == true)
             {
 
-                if (Continue != true)
+                if (Player1.Continue != true)
                 {
                     break; 
                 }
@@ -32,8 +31,23 @@ namespace BlackJack
                 Round CurrentRound = new Round();
 
                 Console.WriteLine("Please enter your bet amount for this hand");
-                var bet = Console.ReadLine();
-                uint BetAmount = Convert.ToUInt16(bet); 
+                String bet = "";
+                uint BetAmount;
+
+                bet = Console.ReadLine();
+
+                if (uint.TryParse(bet, out BetAmount))
+                {
+                    BetAmount = Convert.ToUInt16(bet);
+                } 
+                else
+                {
+                    while (uint.TryParse(bet, out BetAmount) != true)
+                    {
+                        Console.WriteLine("Please enter your bet amount for this hand in positive numbers only!");
+                        bet = Console.ReadLine();
+                    }
+                }
 
                 var BankerHand = new Hand(Banker, BetAmount);
                 var PlayerHand = new Hand(Player1, BetAmount);
@@ -74,7 +88,9 @@ namespace BlackJack
 
                 CurrentRound.checkWin(BankerHand, PlayerHand);
                 Console.WriteLine("Your total chip value is: $" + Player1.TotalWorth);
-                CurrentRound.endRound();
+                Console.WriteLine("Would you like to play another round? (Yes/No)");
+                var PlayNextRound = Console.ReadLine(); 
+                Player1.ContinueToPlay(PlayNextRound);
 
             }
 
