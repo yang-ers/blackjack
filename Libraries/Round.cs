@@ -9,37 +9,18 @@ namespace BlackJack.Libraries
     public class Round
     {
         public int NumberOfPlayers { get; set; }
-        public int NumberOfDecks { get; set; }
-        //public List<Player> Players { get; set; } = null!; 
-        public const int Players = 2; //hardcoded to 2 for banker and player1
+        private int NumberOfDecks { get; set; } = 1; //todo 
+        public List<Player> CurrentPlayers { get; set; } = null!; 
         public bool RoundActive { get; set; } = true;
         public List<Hand> Hands { get; set; } = null!;
+        public Deck GameDeck { get; set; } = null!; 
         public Round()
         {
-            this.NumberOfPlayers = NumberOfPlayers;
+            this.CurrentPlayers = new List<Player>(); 
             this.NumberOfDecks = NumberOfDecks;
             this.RoundActive = RoundActive;
-            this.Hands = Hands; 
-        }
-
-        //inserts 52 cards into deck based on enum functions in card class
-        public Deck initializeDeck()
-        {
-            Deck GameDeck = new Deck();
-            Console.WriteLine("Initializing Deck");
-            foreach (var cardVal in Enum.GetNames(typeof(Card.CardValues)))
-            {
-                foreach (var cardSuit in Enum.GetValues(typeof(Card.CardSuits)))
-                {
-                    var cardV = Convert.ToString(cardVal);
-                    var cardS = Convert.ToString(cardSuit);
-                    var currentCard = new Card(cardV, cardS);
-                    GameDeck.addCardtoDeck(currentCard);
-
-                }
-            }
-
-            return GameDeck;
+            this.Hands = new List<Hand>();
+            this.GameDeck = GameDeck; 
         }
 
         public void checkWin(Hand BankerHand, Hand PlayerHand)
@@ -71,6 +52,86 @@ namespace BlackJack.Libraries
                 Console.WriteLine("Push, no one wins");
             }
 
+        }
+
+        public uint checkBet()
+        {
+            Console.WriteLine("Please enter your bet amount for this hand");
+
+            uint BetAmount;
+
+            var bet = Console.ReadLine();
+
+            if (uint.TryParse(bet, out BetAmount))
+            {
+                return BetAmount = Convert.ToUInt16(bet);
+            }
+            else
+            {
+                while (uint.TryParse(bet, out BetAmount) != true)
+                {
+                    Console.WriteLine("Please enter your bet amount for this hand in positive numbers only!");
+                    bet = Console.ReadLine();
+                }
+
+                return BetAmount = Convert.ToUInt16(bet);
+
+            }
+        }
+
+        public void instantiateRound(Table CurrentTable)
+        {
+
+            Deck GameDeck = new Deck();
+            GameDeck = GameDeck.initializeDeck(GameDeck);
+
+            uint PlayerBet = this.checkBet();
+
+            User Banker = CurrentTable.Banker;
+            Player Player1 = CurrentTable.CurrentPlayers[0];
+
+            Hand BankerHand = new Hand(Banker, PlayerBet);
+            Hand PlayerHand = new Hand(Player1, PlayerBet);
+
+            this.Hands.Add(BankerHand);
+            this.Hands.Add(PlayerHand);
+            this.playRound(GameDeck);
+
+        }
+
+        public void playRound(Deck GameDeck)
+        {
+            Hand BankerHand = this.Hands[0];
+            Hand PlayerHand = this.Hands[1]; //todo hardcode place
+            PlayerHand.dealInitialCardsToPlayer(GameDeck);
+            BankerHand.BankerHit(GameDeck);
+            PlayerHand.showCurrentHand();
+
+            while (PlayerHand.checkBust() is not true & BankerHand.checkBust() is not true)
+            {
+                Console.WriteLine("Insert the letter 'h' to HIT");
+
+                var hit = Console.ReadLine();
+
+                if (hit == "h")
+                {
+                    PlayerHand.playerHit(GameDeck);
+                    PlayerHand.showCurrentHand();
+                }
+                else
+                {
+                    while (BankerHand.HandTotal <= 21
+                        & BankerHand.HandTotal <= 17)
+                    {
+                        BankerHand.BankerHit(GameDeck);
+                    }
+
+                    break;
+                }
+
+            }
+
+            this.checkWin(BankerHand, PlayerHand);
         }
 
         public void endRound()

@@ -9,12 +9,13 @@ namespace BlackJack.Libraries
     internal class Banker : User
     {
 
-        private double InitialAmount = 99999; 
+        private double InitialAmount = 99999;
 
         public Banker()
         {
             this.Name = "Banker"; 
             this.TotalWorth = InitialAmount;
         }
+
     }
 }

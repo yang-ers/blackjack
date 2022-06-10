@@ -32,7 +32,7 @@ namespace BlackJack.Libraries
         }
 
 
-        public bool checkAces(Card card)
+        protected bool checkAces(Card card)
         {
             if (card.Value == "Ace")
             {
@@ -127,6 +127,7 @@ namespace BlackJack.Libraries
 
         public void dealInitialCardsToPlayer(Deck GameDeck)
         {
+            Console.WriteLine("Dealing hands");
 
             for (int initialDeal = 0; initialDeal < 2; initialDeal++)
             {

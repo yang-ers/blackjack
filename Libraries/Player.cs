@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack.Libraries
 {
-    public class Player : User
+    public class Player : User, IUser
     {
 
         private double InitialWorth = 0;
@@ -20,7 +20,7 @@ namespace BlackJack.Libraries
             this.Continue = DefaultContinue; 
 
         }
-        public void ContinueToPlay(string input)
+        public void continueToPlay(string input)
         {
             if (input.ToLower() == "yes")
             {
