@@ -82,7 +82,7 @@ namespace BlackJack.Libraries
         public void instantiateRound(Table CurrentTable)
         {
 
-            Deck GameDeck = new Deck();
+            IDeck GameDeck = new Deck();
             GameDeck = GameDeck.initializeDeck(GameDeck);
 
             uint PlayerBet = this.checkBet();
@@ -99,7 +99,7 @@ namespace BlackJack.Libraries
 
         }
 
-        public void playRound(Deck GameDeck)
+        public void playRound(IDeck GameDeck)
         {
             Hand BankerHand = this.Hands[0];
             Hand PlayerHand = this.Hands[1]; //todo hardcode place

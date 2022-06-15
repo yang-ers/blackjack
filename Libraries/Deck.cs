@@ -5,32 +5,32 @@ using System.Text;
 
 namespace BlackJack.Libraries
 {
-    public class Deck
+    public class Deck : IDeck
     {
 
-        public List<Card> CurrentDeck { get; set; } = null!;
+        public List<ICard> CurrentDeck { get; set; } = null!;
         public int NumberOfCards { get; set; } = 0;
 
         public Deck()
         {
-            this.CurrentDeck = new List<Card>();
+            this.CurrentDeck = new List<ICard>();
         }
 
-        public void addCardtoDeck(Card currentCard)
+        public void addCardtoDeck(ICard currentCard)
         {
             this.CurrentDeck.Add(currentCard);
         }
 
-        public void removeCardfromDeck(Card currentCard)
+        public void removeCardfromDeck(ICard currentCard)
         {
             this.CurrentDeck.Remove(currentCard);
         }
 
 
         //inserts 52 cards into deck based on enum functions in card class
-        public Deck initializeDeck(Deck GameDeck)
+        public IDeck initializeDeck(IDeck GameDeck)
         {
-            
+
             foreach (var cardVal in Enum.GetNames(typeof(Enums.CardValues)))
             {
                 foreach (var cardSuit in Enum.GetValues(typeof(Enums.CardSuits)))

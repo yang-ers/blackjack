@@ -12,7 +12,7 @@ namespace BlackJack.Libraries
         public int HitTotal { get; set; }
         public User user { get; set; }
         public uint BetAmount {get; set; }
-        public List<Card> CurrentHand { get; set; } = null!;
+        public List<ICard> CurrentHand { get; set; } = null!;
         public bool Bust { get; set; } = false;
         public bool Stay { get; set; } = false;
         public bool Blackjack { get; set; }
@@ -26,13 +26,13 @@ namespace BlackJack.Libraries
             this.HandTotal = beginZero;
             this.user = user;
             this.BetAmount = betAmount;
-            this.CurrentHand = new List<Card>();
+            this.CurrentHand = new List<ICard>();
             this.HitTotal = beginZero;
 
         }
 
 
-        protected bool checkAces(Card card)
+        protected bool checkAces(ICard card)
         {
             if (card.Value == "Ace")
             {
@@ -49,7 +49,7 @@ namespace BlackJack.Libraries
             int HandValue = 0;
             int NumberOfAces = 0; 
 
-            foreach (Card card in this.CurrentHand)
+            foreach (ICard card in this.CurrentHand)
             {
 
                 if (checkAces(card))
@@ -74,12 +74,12 @@ namespace BlackJack.Libraries
         }
 
 
-        public Card addCardToHand(Deck GameDeck)
+        public ICard addCardToHand(IDeck GameDeck)
         {
             var rand = new Random();
             int randIndex = rand.Next(GameDeck.CurrentDeck.Count);
 
-            Card randomCard = GameDeck.CurrentDeck[randIndex];
+            ICard randomCard = GameDeck.CurrentDeck[randIndex];
             randomCard = new Card(randomCard.Value, randomCard.Suit);
 
             this.CurrentHand?.Add(randomCard);
@@ -94,7 +94,7 @@ namespace BlackJack.Libraries
         public void showCurrentHand()
         {
 
-            foreach (Card card in this.CurrentHand)
+            foreach (ICard card in this.CurrentHand)
             {
                 Console.WriteLine("You have a: " + card.Value + " of " + card.Suit);
             }
@@ -109,23 +109,23 @@ namespace BlackJack.Libraries
         }
 
 
-        public void playerHit(Deck GameDeck)
+        public void playerHit(IDeck GameDeck)
         {
 
-            Card card = addCardToHand(GameDeck);
+            ICard card = addCardToHand(GameDeck);
             Console.WriteLine("You receives a " + card.Value + " of " + card.Suit);
         }
 
 
-        public void BankerHit(Deck GameDeck)
+        public void BankerHit(IDeck GameDeck)
         {
-            Card card = addCardToHand(GameDeck);
+            ICard card = addCardToHand(GameDeck);
             Console.WriteLine("Banker receives a " + card.Value + " of " + card.Suit);
             Console.WriteLine("Banker total = " + this.HandTotal); 
         }
 
 
-        public void dealInitialCardsToPlayer(Deck GameDeck)
+        public void dealInitialCardsToPlayer(IDeck GameDeck)
         {
             Console.WriteLine("Dealing hands");
 
@@ -142,7 +142,7 @@ namespace BlackJack.Libraries
         public void checkIfBlackjack (Hand PlayerHand)
         {
             int HandTotal = 0; 
-            foreach (Card card in PlayerHand.CurrentHand)
+            foreach (ICard card in PlayerHand.CurrentHand)
             {
                 HandTotal += Convert.ToInt16(Enum.Parse(typeof(Enums.CardValues), card.Value)); 
             }

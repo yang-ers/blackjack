@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack.Libraries
 {
-    public class Card
+    public class Card : ICard
     {
         public string Suit { get; set; }
         public string Value { get; set; }
@@ -16,8 +16,6 @@ namespace BlackJack.Libraries
             Value = value;
             Suit = suit;
         }
-
-
 
     }
 }
