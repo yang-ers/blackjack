@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlackJack.Libraries
 {
-    public interface IUser
+    public interface IBanker : IUser
     {
-        double TotalWorth { get; set; }
-        string Name { get; set; }
 
     }
 }

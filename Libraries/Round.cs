@@ -10,13 +10,13 @@ namespace BlackJack.Libraries
     {
         public int NumberOfPlayers { get; set; }
         private int NumberOfDecks { get; set; } = 1; //todo 
-        public List<Player> CurrentPlayers { get; set; } = null!; 
+        public List<IPlayer> CurrentPlayers { get; set; } = null!; 
         public bool RoundActive { get; set; } = true;
         public List<Hand> Hands { get; set; } = null!;
         public Deck GameDeck { get; set; } = null!; 
         public Round()
         {
-            this.CurrentPlayers = new List<Player>(); 
+            this.CurrentPlayers = new List<IPlayer>(); 
             this.NumberOfDecks = NumberOfDecks;
             this.RoundActive = RoundActive;
             this.Hands = new List<Hand>();
@@ -87,8 +87,8 @@ namespace BlackJack.Libraries
 
             uint PlayerBet = this.checkBet();
 
-            User Banker = CurrentTable.Banker;
-            Player Player1 = CurrentTable.CurrentPlayers[0];
+            IBanker Banker = CurrentTable.Banker;
+            IPlayer Player1 = CurrentTable.CurrentPlayers[0];
 
             Hand BankerHand = new Hand(Banker, PlayerBet);
             Hand PlayerHand = new Hand(Player1, PlayerBet);

@@ -9,19 +9,19 @@ namespace BlackJack.Libraries
     public class Table
     {
         public int Id { get; set; }
-        public List<Player> CurrentPlayers { get; set; } = null!;
-        public User Banker { get; set; } = new Banker();
+        public List<IPlayer> CurrentPlayers { get; set; } = null!;
+        public IBanker Banker { get; set; }
         public Table()
         {
             this.Id = Id++; 
-            this.CurrentPlayers = new List<Player>();
-            this.Banker = Banker; 
+            this.CurrentPlayers = new List<IPlayer>();
+            this.Banker = new Banker(); 
         }
 
         public void instantiatePlayersToTable()
         {
 
-            Player Player1 = new Player();
+            IPlayer Player1 = new Player();
 
             Console.WriteLine("Please enter your name");
 

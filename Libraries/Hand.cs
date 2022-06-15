@@ -10,9 +10,9 @@ namespace BlackJack.Libraries
     {
         public int HandTotal { get; set; }
         public int HitTotal { get; set; }
-        public User user { get; set; }
+        public IUser user { get; set; }
         public uint BetAmount {get; set; }
-        public List<ICard> CurrentHand { get; set; } = null!;
+        public List<ICard> CurrentHand { get; set; }
         public bool Bust { get; set; } = false;
         public bool Stay { get; set; } = false;
         public bool Blackjack { get; set; }
@@ -20,7 +20,7 @@ namespace BlackJack.Libraries
         private static int beginZero = 0;
 
 
-        public Hand(User user, uint betAmount)
+        public Hand(IUser user, uint betAmount)
         {
 
             this.HandTotal = beginZero;

@@ -15,8 +15,8 @@ namespace BlackJack
             Console.WriteLine("Welcome to you always will win Blackjack, where you have the edge against the house");
 
             Table CurrentTable = new Table();
-            CurrentTable.instantiatePlayersToTable(); 
-            Player Player1 = CurrentTable.CurrentPlayers[0]; 
+            CurrentTable.instantiatePlayersToTable();
+            IPlayer Player1 = CurrentTable.CurrentPlayers[0]; 
 
             while (Player1.Continue == true)
             {
