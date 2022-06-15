@@ -57,7 +57,7 @@ namespace BlackJack.Libraries
                     NumberOfAces++;
                 }
 
-                int CardValue = Convert.ToInt32(Enum.Parse(typeof(Card.CardValues), card.Value));
+                int CardValue = Convert.ToInt32(Enum.Parse(typeof(Enums.CardValues), card.Value));
                 HandValue += CardValue;
 
             }
@@ -144,7 +144,7 @@ namespace BlackJack.Libraries
             int HandTotal = 0; 
             foreach (Card card in PlayerHand.CurrentHand)
             {
-                HandTotal += Convert.ToInt16(Enum.Parse(typeof(Card.CardValues), card.Value)); 
+                HandTotal += Convert.ToInt16(Enum.Parse(typeof(Enums.CardValues), card.Value)); 
             }
 
             if (HandTotal == 21 & this.CurrentHand.Count == 2)

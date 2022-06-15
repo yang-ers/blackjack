@@ -30,11 +30,10 @@ namespace BlackJack.Libraries
         //inserts 52 cards into deck based on enum functions in card class
         public Deck initializeDeck(Deck GameDeck)
         {
-
-            Console.WriteLine("Initializing Deck");
-            foreach (var cardVal in Enum.GetNames(typeof(Card.CardValues)))
+            
+            foreach (var cardVal in Enum.GetNames(typeof(Enums.CardValues)))
             {
-                foreach (var cardSuit in Enum.GetValues(typeof(Card.CardSuits)))
+                foreach (var cardSuit in Enum.GetValues(typeof(Enums.CardSuits)))
                 {
                     var cardV = Convert.ToString(cardVal);
                     var cardS = Convert.ToString(cardSuit);
@@ -44,7 +43,7 @@ namespace BlackJack.Libraries
                 }
             }
 
-            Console.WriteLine("Game deck initialized");
+            Console.WriteLine("Game deck shuffled");
 
             return GameDeck;
         }
