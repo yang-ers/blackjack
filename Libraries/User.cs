@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack.Libraries
 {
-    public abstract class User
+    public abstract class User : IUser
     {
         public string Name { get; set; } = null!;
         public double TotalWorth { get; set; }

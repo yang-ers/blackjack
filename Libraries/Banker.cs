@@ -8,8 +8,8 @@ namespace BlackJack.Libraries
 {
     public class Banker : User, IBanker
     {
-        public new string Name = "Banker";
-        private double InitialAmount = 99999;
+        public new string Name { get; set; } = "Banker";
+        private double InitialAmount { get; set; } = 99999;
 
         public Banker()
         {

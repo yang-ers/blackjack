@@ -6,40 +6,25 @@ using System.Threading.Tasks;
 
 namespace BlackJack.Libraries
 {
-    public class Hand 
+    public abstract class Hand : IHand
     {
         public int HandTotal { get; set; }
         public int HitTotal { get; set; }
-        public IUser user { get; set; }
-        public uint BetAmount {get; set; }
-        public List<ICard> CurrentHand { get; set; }
+        public uint BetAmount { get; set; }
+        public List<ICard> CurrentHand { get; set; } = null!; 
         public bool Bust { get; set; } = false;
         public bool Stay { get; set; } = false;
         public bool Blackjack { get; set; }
 
-        private static int beginZero = 0;
-
-
-        public Hand(IUser user, uint betAmount)
-        {
-
-            this.HandTotal = beginZero;
-            this.user = user;
-            this.BetAmount = betAmount;
-            this.CurrentHand = new List<ICard>();
-            this.HitTotal = beginZero;
-
-        }
-
-
+        protected int beginZero = 0;
         protected bool checkAces(ICard card)
         {
             if (card.Value == "Ace")
             {
                 return true;
             }
-            else return false; 
-             
+            else return false;
+
         }
 
 
@@ -47,7 +32,7 @@ namespace BlackJack.Libraries
         {
 
             int HandValue = 0;
-            int NumberOfAces = 0; 
+            int NumberOfAces = 0;
 
             foreach (ICard card in this.CurrentHand)
             {
@@ -64,10 +49,10 @@ namespace BlackJack.Libraries
 
             if (HandValue > 21)
             {
-                HandValue -= NumberOfAces * 10; 
+                HandValue -= NumberOfAces * 10;
             }
 
-            this.HandTotal = HandValue; 
+            this.HandTotal = HandValue;
             return this.HandTotal;
 
 
@@ -87,7 +72,7 @@ namespace BlackJack.Libraries
             this.HitTotal++;
             calculateHandTotal();
 
-            return randomCard; 
+            return randomCard;
         }
 
 
@@ -101,7 +86,7 @@ namespace BlackJack.Libraries
             Console.WriteLine("The total value of your hand is: " + this.HandTotal);
         }
 
-         
+
         public bool checkBust()
         {
 
@@ -109,47 +94,18 @@ namespace BlackJack.Libraries
         }
 
 
-        public void playerHit(IDeck GameDeck)
-        {
-
-            ICard card = addCardToHand(GameDeck);
-            Console.WriteLine("You receives a " + card.Value + " of " + card.Suit);
-        }
-
-
-        public void BankerHit(IDeck GameDeck)
-        {
-            ICard card = addCardToHand(GameDeck);
-            Console.WriteLine("Banker receives a " + card.Value + " of " + card.Suit);
-            Console.WriteLine("Banker total = " + this.HandTotal); 
-        }
-
-
-        public void dealInitialCardsToPlayer(IDeck GameDeck)
-        {
-            Console.WriteLine("Dealing hands");
-
-            for (int initialDeal = 0; initialDeal < 2; initialDeal++)
-            {
-                this.playerHit(GameDeck);
-            }
-
-            checkIfBlackjack(this); 
-
-        }
-
         //check if the value of the two initial cards dealt to player equates to 21
-        public void checkIfBlackjack (Hand PlayerHand)
+        public void checkIfBlackjack(IHand hand)
         {
-            int HandTotal = 0; 
-            foreach (ICard card in PlayerHand.CurrentHand)
+            int HandTotal = 0;
+            foreach (ICard card in hand.CurrentHand)
             {
-                HandTotal += Convert.ToInt16(Enum.Parse(typeof(Enums.CardValues), card.Value)); 
+                HandTotal += Convert.ToInt16(Enum.Parse(typeof(Enums.CardValues), card.Value));
             }
 
             if (HandTotal == 21 & this.CurrentHand.Count == 2)
             {
-                this.Blackjack = true; 
+                this.Blackjack = true;
             }
         }
 
